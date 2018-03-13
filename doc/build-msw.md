@@ -16,9 +16,9 @@ WINDOWS BUILD NOTES
 Example of Configuration file
 ---------------------
 
-	rpcuser=stipendd
+	rpcuser=xycoind
 	rpcpassword=vejktejklungwerklcgerkum
-	rpcport=46979
+	rpcport=55252
 	rpcallowip=127.0.0.1
 	listen=1
 	server=1

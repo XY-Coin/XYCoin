@@ -37,7 +37,7 @@ using namespace boost;
 #define SPORK_2_INSTANTX_DEFAULT                              978307200   //2001-1-1 23:59:59 GMT
 #define SPORK_3_INSTANTX_BLOCK_FILTERING_DEFAULT              978307200   //2001-1-1 23:59:59 GMT
 #define SPORK_4_RECONVERGE_DEFAULT                            1451606400  //2016-01-01 // NOT USED
-#define SPORK_5_MAX_VALUE_DEFAULT                             500         //500 SPD
+#define SPORK_5_MAX_VALUE_DEFAULT                             500         //500 XYC
 #define SPORK_6_REPLAY_BLOCKS_DEFAULT                         0 		  // NOT USED
 #define SPORK_8_MASTERNODE_PAYMENT_ENFORCEMENT_DEFAULT        4070908800   //OFF
 #define SPORK_9_MASTERNODE_BUDGET_ENFORCEMENT_DEFAULT         4070908800   //OFF
@@ -113,7 +113,7 @@ private:
 public:
 
     CSporkManager() {
-        strMainPubKey = "02626bfeb86bc74a803055081e494e450b41d7555ad44cf448b5f9dd66e1c3e5d9";
+        strMainPubKey = "04b38493e8972daa831ad714b219d2f3abe7b6a2f90986dee7c877acc72d261f93807d7429e1d52e4bef4228c6523243ca54d37335dde0f8ace3781a70fafa6672";
         strTestPubKey = "02626bfeb86bc74a803055081e494e450b41d7555ad44cf448b5f9dd66e1c3e5d9";
     }
 

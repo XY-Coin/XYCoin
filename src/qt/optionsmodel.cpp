@@ -66,13 +66,13 @@ void OptionsModel::Init()
     if (!settings.contains("nDarksendRounds"))
         settings.setValue("nDarksendRounds", 2);
     nDarksendRounds = settings.value("nDarksendRounds").toLongLong();
-    if (!settings.contains("nAnonymizeStipendAmount"))
-        settings.setValue("nAnonymizeStipendAmount", 1000);
-    nAnonymizeStipendAmount = settings.value("nAnonymizeStipendAmount").toLongLong();
+    if (!settings.contains("nAnonymizeXYCoinAmount"))
+        settings.setValue("nAnonymizeXYCoinAmount", 1000);
+    nAnonymizeXYCoinAmount = settings.value("nAnonymizeXYCoinAmount").toLongLong();
     if (settings.contains("nDarksendRounds"))
         SoftSetArg("-darksendrounds", settings.value("nDarksendRounds").toString().toStdString());
-    if (settings.contains("nAnonymizeStipendAmount"))
-        SoftSetArg("-anonymizestipendamount", settings.value("nAnonymizeStipendAmount").toString().toStdString());
+    if (settings.contains("nAnonymizeXYCoinAmount"))
+        SoftSetArg("-anonymizexycoinamount", settings.value("nAnonymizeXYCoinAmount").toString().toStdString());
 
 
 
@@ -206,8 +206,8 @@ QVariant OptionsModel::data(const QModelIndex & index, int role) const
             return fCoinControlFeatures;
         case DarksendRounds:
             return QVariant(nDarksendRounds);
-        case AnonymizeStipendAmount:
-            return QVariant(nAnonymizeStipendAmount);
+        case AnonymizeXYCoinAmount:
+            return QVariant(nAnonymizeXYCoinAmount);
         case UseBlackTheme:
             return QVariant(fUseBlackTheme);
         default:
@@ -318,10 +318,10 @@ bool OptionsModel::setData(const QModelIndex & index, const QVariant & value, in
             settings.setValue("nDarksendRounds", nDarksendRounds);
             emit darksendRoundsChanged(nDarksendRounds);
             break;
-        case AnonymizeStipendAmount:
-            nAnonymizeStipendAmount = value.toInt();
-            settings.setValue("nAnonymizeStipendAmount", nAnonymizeStipendAmount);
-            emit AnonymizeStipendAmountChanged(nAnonymizeStipendAmount);
+        case AnonymizeXYCoinAmount:
+            nAnonymizeXYCoinAmount = value.toInt();
+            settings.setValue("nAnonymizeXYCoinAmount", nAnonymizeXYCoinAmount);
+            emit AnonymizeXYCoinAmountChanged(nAnonymizeXYCoinAmount);
             break;
         default:
             break;

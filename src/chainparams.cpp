@@ -1,7 +1,7 @@
 // Copyright (c) 2010 Satoshi Nakamoto
 // Copyright (c) 2009-2012 The Bitcoin developers
 // Copyright (c) 2014-2015 Dash Developers
-// Copyright (c) 2017-2018 The Stipend developers
+// Copyright (c) 2017-2018 The XYCoin developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -56,19 +56,14 @@ static void convertSeeds(std::vector<CAddress> &vSeedsOut, const unsigned int *d
 static void getHardcodedSeeds(std::vector<CAddress> &vSeedsOut)
 {
     std::vector<std::string> ips;
-    ips.push_back("34.225.25.154");
-    ips.push_back("52.45.189.6");
-    ips.push_back("34.232.249.188");
-    ips.push_back("34.231.228.73");
-    ips.push_back("34.239.99.171");
-    ips.push_back("18.218.0.160");
-    ips.push_back("13.59.189.252");
-    ips.push_back("52.15.218.190");
+    ips.push_back("144.202.35.134");
+    ips.push_back("209.250.227.59");
+
 
     const int64_t oneWeek = 7 * 24 * 60 * 60;
     for (size_t i = 0; i < ips.size(); ++i)
     {
-        CAddress addr(CService(ips[i], 46978));
+        CAddress addr(CService(ips[i], 44141));
         addr.nTime = GetTime() - GetRand(oneWeek) - oneWeek;
         vSeedsOut.push_back(addr);
     }
@@ -80,16 +75,16 @@ public:
         // The message start string is designed to be unlikely to occur in normal data.
         // The characters are rarely used upper ASCII, not valid as UTF-8, and produce
         // a large 4-byte int at any alignment.
-        pchMessageStart[0] = 0xa3;
-        pchMessageStart[1] = 0xfb;
-        pchMessageStart[2] = 0xdb;
-        pchMessageStart[3] = 0xdb;
-        vAlertPubKey = ParseHex("7501131e64effceb1644efc56ed3594ef64425850aa52617506177cf245575f0aa11e5b1777cfd8621ea39a7996872a07631ea25b3fdda00df37f5e982fe58850a");
-        nDefaultPort = 46978;
-        nRPCPort = 46979;
+        pchMessageStart[0] = 0x2c;
+        pchMessageStart[1] = 0x19;
+        pchMessageStart[2] = 0x90;
+        pchMessageStart[3] = 0xb3;
+        vAlertPubKey = ParseHex("04359a8f45aad2d671659375a8252825cf6aed20a7af01be04b7366ab93805ef88e0cf3f1b673e3ef80442582a899bcda32445d461a88aadabb6fb02e3b78fe5d5");
+        nDefaultPort = 44141;
+        nRPCPort = 55252;
         bnProofOfWorkLimit = CBigNum(~uint256(0) >> 16); // starting difficulty is 1 / 2^12
 
-        const char* pszTimestamp = "Update this at the day of deployment";
+        const char* pszTimestamp = "xy coin has started march 2018";
         std::vector<CTxIn> vin;
         vin.resize(1);
         vin[0].scriptSig = CScript() << 0 << CBigNum(42) << vector<unsigned char>((const unsigned char*)pszTimestamp, (const unsigned char*)pszTimestamp + strlen(pszTimestamp));
@@ -98,7 +93,7 @@ public:
         vout[0].SetEmpty();
 
 	// original 1516154401
-        CTransaction txNew(1, 1517616496, vin, vout, 0);
+        CTransaction txNew(1, 1520899180, vin, vout, 0);
 
         LogPrintf("genesis mainnet transaction:  %s\n", txNew.ToString().c_str());
 
@@ -107,46 +102,44 @@ public:
         genesis.hashPrevBlock = 0;
         genesis.hashMerkleRoot = genesis.BuildMerkleTree();
         genesis.nVersion = 1;
-        genesis.nTime    = 1518016375; // Wednesday, 17-Jan-18 02:00:01 UTC
+        genesis.nTime    = 1520899175; // Wednesday, 17-Jan-18 02:00:01 UTC
         genesis.nBits    = bnProofOfWorkLimit.GetCompact();
-        genesis.nNonce   = 644221;
+        genesis.nNonce   = 12877;
+
+        /*
+        genesis.nTime = 1520899175
+        genesis.nNonce = 12877
+        genesis.nVersion = 1
+        genesis.GetHash = 000009b19e7125989633f1ea78a111dc19299b81d8e20a3462b313fdaa56fd50
+        genesis.hashMerkleRoot = ba6d238c5fd375a21335ccb4e3d53a427097c59638ed3a49ad3b2e26b68f0cb1
+
+        */
 
         hashGenesisBlock = genesis.GetHash();
+        assert(hashGenesisBlock == uint256("0x000009b19e7125989633f1ea78a111dc19299b81d8e20a3462b313fdaa56fd50"));
+        assert(genesis.hashMerkleRoot == uint256("0xba6d238c5fd375a21335ccb4e3d53a427097c59638ed3a49ad3b2e26b68f0cb1"));
 
-	      LogPrintf("Display genesis hash so we can input it below %s\n", hashGenesisBlock.ToString().c_str());
-	      LogPrintf("Display merkle root so we can input it below %s\n", genesis.hashMerkleRoot.ToString().c_str());
-        LogPrintf("Display nonce so we can input it below %s\n", genesis.nNonce);
-        LogPrintf("Display time so we can input it below %s\n", genesis.nTime);
-
-        assert(hashGenesisBlock == uint256("0x7a5541643f97ca4bff6cd7b01e3fbea04002760713320a5750276d9b9c71d845"));
-        assert(genesis.hashMerkleRoot == uint256("0xc556e8828b26bdd1d9b09a7a51e19c554c015098f129d204020df9db58cb563c"));
-
-        base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,63); // S
-        base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,21);
-        base58Prefixes[SECRET_KEY] =     std::vector<unsigned char>(1,23);
-        base58Prefixes[STEALTH_ADDRESS] = std::vector<unsigned char>(1,41);
+        base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,75); // X
+        base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,63); // S
+        base58Prefixes[SECRET_KEY] =     std::vector<unsigned char>(1,78); // Y
+        base58Prefixes[STEALTH_ADDRESS] = std::vector<unsigned char>(1,81); //Z
         base58Prefixes[EXT_PUBLIC_KEY] = list_of(0x99)(0x75)(0x45)(0xE2).convert_to_container<std::vector<unsigned char> >();
         base58Prefixes[EXT_SECRET_KEY] = list_of(0x99)(0x73)(0x43)(0xE3).convert_to_container<std::vector<unsigned char> >();
 
 	// NOTE: MODIFIED THIS TO 0.0.0.0
-        vSeeds.push_back(CDNSSeedData("1",  "34.225.25.154"));
-	vSeeds.push_back(CDNSSeedData("2",  "52.45.189.6"));
-	vSeeds.push_back(CDNSSeedData("3",  "34.232.249.188"));
-	vSeeds.push_back(CDNSSeedData("4",  "34.231.228.73"));
-	vSeeds.push_back(CDNSSeedData("5",  "34.239.99.171"));
-	vSeeds.push_back(CDNSSeedData("6",  "18.218.0.160"));
-	vSeeds.push_back(CDNSSeedData("7",  "13.59.189.252"));
-	vSeeds.push_back(CDNSSeedData("8",  "52.15.218.190"));
+
+	vSeeds.push_back(CDNSSeedData("USA",  "209.250.227.59"));
+	vSeeds.push_back(CDNSSeedData("EU",  "144.202.35.134"));
 
 	convertSeeds(vFixedSeeds, pnSeed, ARRAYLEN(pnSeed), nDefaultPort);
 
         getHardcodedSeeds(vFixedSeeds);
 
         nPoolMaxTransactions = 3;
-        strDarksendPoolDummyAddress = "hFoQDUrp63QWqFhjEr3Fmc4ubHRhyzjKUC";
+        strDarksendPoolDummyAddress = "XFoQDUrp63QWqFhjEr3Fmc4ubHRhyzjKUC";
 
-        nLastPOWBlock = 210000;
-        nPOSStartBlock = 1500;
+        nLastPOWBlock = 9999999;
+        nPOSStartBlock = 50;
     }
 
     virtual const CBlock& GenesisBlock() const { return genesis; }
@@ -188,7 +181,7 @@ public:
         hashGenesisBlock = genesis.GetHash();
 
         LogPrintf("Display genesis hash so we can input it below %s\n", hashGenesisBlock.ToString().c_str());
-        assert(hashGenesisBlock == uint256("0xe133d1d3f584f1c3f561e7d0606fa87dabb869325a979c2a82e2f3943c0e3370"));
+        //assert(hashGenesisBlock == uint256("0xe133d1d3f584f1c3f561e7d0606fa87dabb869325a979c2a82e2f3943c0e3370"));
 
         vFixedSeeds.clear();
         vSeeds.clear();
