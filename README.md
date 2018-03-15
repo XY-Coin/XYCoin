@@ -19,7 +19,7 @@ Welcome to the future!
 ### Base Specs:
 
 *	Algorithm (PoW/PoS): C11 / SHA256d
-*	Block Time (PoW/PoS): 1 minutes / 1 minutes
+*	Block Time (PoW/PoS): 2 minutes / 2 minutes
 *	Maturity: 25 blocks
 *	Difficulty Retargeting: every block
 *	Total Supply: 75,000,000
